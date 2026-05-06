@@ -23,7 +23,9 @@ from mcmc_options.pricing import (
 )
 
 
+# ---------------------------------------------------------------------------
 # Black-Scholes analytical tests
+# ---------------------------------------------------------------------------
 
 class TestBlackScholes:
 
@@ -90,7 +92,9 @@ class TestBlackScholes:
         assert r2.call_price > r1.call_price
 
 
+# ---------------------------------------------------------------------------
 # Monte Carlo pricing tests
+# ---------------------------------------------------------------------------
 
 class TestMonteCarloPricing:
 
@@ -135,10 +139,15 @@ class TestMonteCarloPricing:
         cfg_anti  = dataclasses.replace(base_cfg, use_antithetic=True,  seed=99)
         mc_plain = price_european_mc(cfg_plain)
         mc_anti  = price_european_mc(cfg_anti)
+        # Antithetic should give lower or comparable stderr (not guaranteed in
+        # finite samples but holds statistically for monotone payoffs).
+        # We use a generous tolerance to avoid flakiness.
         assert mc_anti.call_stderr <= mc_plain.call_stderr * 1.10
 
 
+# ---------------------------------------------------------------------------
 # Config validation tests
+# ---------------------------------------------------------------------------
 
 class TestConfigValidation:
 

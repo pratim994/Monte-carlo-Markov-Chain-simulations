@@ -1,11 +1,17 @@
 """
 simulation.py — Monte Carlo path simulation engine.
 
+Design note on "MCMC vs standard Monte Carlo"
+----------------------------------------------
+Classical option pricing uses *standard* Monte Carlo integration, not
+Markov Chain Monte Carlo (which is designed for sampling from an unknown
+posterior distribution).  Here we implement:
 
   1. Standard Monte Carlo (GBM paths)           — the workhorse
   2. Antithetic Variates                        — variance reduction
   3. A thin MCMC-flavoured wrapper              — Metropolis sampler over
-
+     the risk-neutral density, included for pedagogical completeness and
+     to satisfy the "MCMC-inspired" requirement.
 
 Geometric Brownian Motion (GBM)
 --------------------------------
@@ -13,7 +19,7 @@ Under the risk-neutral measure Q the asset price follows:
 
     dS = r S dt + σ S dW_t,   W_t ~ Brownian motion
 
-Exact discretisation :
+Exact discretisation (no Euler error):
 
     S_{t+Δt} = S_t · exp[(r - σ²/2)Δt + σ√Δt · Z],  Z ~ N(0,1)
 
@@ -29,7 +35,9 @@ from numpy.random import Generator
 from .config import SimulationConfig
 
 
+# ---------------------------------------------------------------------------
 # Core path generator
+# ---------------------------------------------------------------------------
 
 def simulate_gbm_paths(
     cfg: SimulationConfig,
@@ -41,6 +49,7 @@ def simulate_gbm_paths(
     Uses the exact log-normal transition, optionally with antithetic variates.
 
     Parameters
+    ----------
     cfg : SimulationConfig
         All model and simulation parameters.
     rng : numpy.random.Generator, optional
@@ -48,12 +57,15 @@ def simulate_gbm_paths(
         If None, a new generator is created from cfg.seed.
 
     Returns
+    -------
     paths : np.ndarray, shape (n_paths, n_steps + 1)
         Simulated asset prices.  paths[:, 0] == cfg.S0,
         paths[:, -1] == terminal prices at maturity.
 
     Notes
+    -----
     Antithetic variates
+    ~~~~~~~~~~~~~~~~~~~
     For every standard normal draw Z we also use -Z.  Because the payoff
     function is monotone in Z, the two estimators are negatively correlated,
     which roughly halves the variance at no extra cost in random-number

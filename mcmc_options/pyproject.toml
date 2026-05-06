@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "mcmc"
+name = "mcmc-options"
 version = "1.0.0"
 description = "3D Monte Carlo simulation for European option pricing under Black-Scholes framework"
 authors = ["Quant Dev <quant@example.com>"]

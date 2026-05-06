@@ -17,7 +17,9 @@ from .config import SimulationConfig, SurfaceConfig
 from .pricing import compute_price_surface
 
 
+# ---------------------------------------------------------------------------
 # Internal helpers
+# ---------------------------------------------------------------------------
 
 def _build_grids(scfg: SurfaceConfig) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """Return (S_arr, T_arr, S_mesh, T_mesh) for the surface."""
@@ -42,7 +44,9 @@ def _style_3d_axis(
     ax.view_init(elev=28, azim=-55)
 
 
+# ---------------------------------------------------------------------------
 # Public plotting functions
+# ---------------------------------------------------------------------------
 
 def plot_option_surface(
     cfg: SimulationConfig,

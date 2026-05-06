@@ -46,6 +46,7 @@ class TestSimulateGBMPaths:
     def test_terminal_price_distribution(self, base_cfg: SimulationConfig) -> None:
         """
         Terminal log-prices should be approximately N(mu, sigma^2).
+        Check that sample mean and std are within 3 standard errors of theory.
         """
         paths = simulate_gbm_paths(base_cfg)
         log_terminal = np.log(paths[:, -1])

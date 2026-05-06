@@ -32,7 +32,9 @@ from .config import SimulationConfig
 from .simulation import simulate_gbm_paths
 
 
+# ---------------------------------------------------------------------------
 # Result containers
+# ---------------------------------------------------------------------------
 
 @dataclass
 class MCPricingResult:
@@ -96,7 +98,9 @@ class ComparisonResult:
         )
 
 
+# ---------------------------------------------------------------------------
 # Monte Carlo pricer
+# ---------------------------------------------------------------------------
 
 def price_european_mc(
     cfg: SimulationConfig,
@@ -106,6 +110,7 @@ def price_european_mc(
     Price European call and put options via Monte Carlo simulation.
 
     Parameters
+    ----------
     cfg : SimulationConfig
         Model and simulation configuration.
     terminal_prices : np.ndarray, optional
@@ -113,10 +118,12 @@ def price_european_mc(
         If None, paths are simulated from cfg internally.
 
     Returns
+    -------
     MCPricingResult
         Call/put prices with standard errors.
 
     Algorithm
+    ---------
     1. Simulate n_simulations GBM paths (or use supplied terminal prices).
     2. Compute payoffs at maturity:
            call_payoff = max(S_T - K, 0)
@@ -151,7 +158,9 @@ def price_european_mc(
     )
 
 
+# ---------------------------------------------------------------------------
 # Analytical Black-Scholes pricer
+# ---------------------------------------------------------------------------
 
 def price_european_bs(
     S: float,
@@ -207,7 +216,9 @@ def price_european_bs_from_config(cfg: SimulationConfig) -> BSPricingResult:
     return price_european_bs(cfg.S0, cfg.K, cfg.r, cfg.sigma, cfg.T)
 
 
+# ---------------------------------------------------------------------------
 # Vectorised surface computation
+# ---------------------------------------------------------------------------
 
 def compute_price_surface(
     S_grid: np.ndarray,
