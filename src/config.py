@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "mcmc"
+version = "1.0.0"
+description = "3D Monte Carlo simulation for European option pricing under Black-Scholes framework"
+authors = ["Quant Dev aryanpratim86@gmail.com>"]
+readme = "README.md"
+packages = [{include = "mcmc_options", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "^1.26"
+matplotlib = "^3.8"
+scipy = "^1.12"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0"
+pytest-cov = "^4.1"
+
+[tool.poetry.scripts]
+mcmc-options = "mcmc_options.main:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
