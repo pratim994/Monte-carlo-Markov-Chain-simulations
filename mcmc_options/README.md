@@ -183,6 +183,9 @@ Absolute errors
 - Antithetic variates roughly double effective sample efficiency
 
 ## Output
-![Alt][/outputs/convergence.png]
-![Alt][/outputs/sample_paths.png]
-![Alt][/outputs/surface_call_put.png]
+
+![Monte Carlo Convergence](outputs/convergence.png)
+
+![Sample GBM Paths](outputs/sample_paths.png)
+
+![3D Call & Put Surface](outputs/surface_call_put.png)
