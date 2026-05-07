@@ -184,8 +184,8 @@ Absolute errors
 
 ## Output
 
-![Monte Carlo Convergence](outputs/convergence.png)
+![Monte Carlo Convergence](mcmc_options/outputs/convergence.png)
 
-![Sample GBM Paths](outputs/sample_paths.png)
+![Sample GBM Paths](mcmc_options/outputs/sample_paths.png)
 
-![3D Call & Put Surface](outputs/surface_call_put.png)
+![3D Call & Put Surface](mcmc_options/outputs/surface_call_put.png)
