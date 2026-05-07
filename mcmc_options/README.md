@@ -42,9 +42,7 @@ the variance at no extra simulation cost.
 
 A Metropolis-Hastings sampler is included that targets the risk-neutral
 log-normal terminal-price distribution. For production pricing, direct GBM
-sampling is preferred (exact, fully vectorised, ~50× faster). The MCMC
-component is provided for pedagogical completeness.
-
+sampling is preferred (exact, fully vectorised, ~50× faster).
 ---
 
 ## Project Structure
@@ -183,3 +181,9 @@ Absolute errors
 - The 3D surface uses the analytical Black-Scholes formula for speed
 - For Monte Carlo surfaces, reduce `n_simulations_surface` (default 20,000) to trade accuracy for speed
 - Antithetic variates roughly double effective sample efficiency
+
+## Output
+<img src="mcmc_options/outputs/convergence.png" alt="Description" width="400">
+<img src="mcmc_options/outputs/sample_paths.png" alt="Description" width="400">
+<img src="mcmc_options/outputs/surface_call_put.png" alt="Description" width="400">
+
